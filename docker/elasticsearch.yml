@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  ai-powered-elasticsearch:
+  elasticsearch:
     build:
       context: ./elasticsearch
     # volumes:
@@ -13,3 +13,9 @@ services:
     environment:
       - 'ES_JAVA_OPTS=-Xms1024m -Xmx1024m'
       - 'discovery.type=single-node'
+  kibana:
+    image: kibana:7.9.3
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200

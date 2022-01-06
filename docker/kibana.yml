@@ -1,8 +1,0 @@
-version: '3.8'
-services:
-  slidelive-kibana:
-    image: kibana:7.9.3
-    ports:
-      - 5601:5601
-    environment:
-      ELASTICSEARCH_HOSTS: http://ai-powered-elasticsearch:9200
