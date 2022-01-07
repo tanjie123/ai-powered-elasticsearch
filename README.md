@@ -17,10 +17,10 @@
 信号的数据结构：
 
 - query_id：发起此信号的查询信号的唯一ID
-- user: 代表特定用户的标识符
-- type: 什么样的信号（查询、点击、购买等）
+- user:  代表特定用户的标识符
+- type:  什么样的信号（查询、点击、购买等）
 - target：信号在此signal_time适用的内容
-- signal_time: 信号发生的日期和时间
+- signal_time:  信号发生的日期和时间
 
 
 
@@ -50,6 +50,30 @@
 | 2        | u123 | add_to_cart | doc4             | 2020-05-01-09:05:50 |
 | 1        | u123 | purchase    | doc3             | 2020-05-01-09:07:15 |
 | 2        | u123 | purchase    | doc4             | 2020-05-01-09:07:15 |
+
+
+
+## Signal Boosting
+
+我们演示了`ipad`在我们的'products'数据集中对查询进行的开箱即用的搜索。
+
+```
+query = "ipad"
+
+collection = "products"
+request = {
+    "query": query,
+    "fields": ["upc", "name", "manufacturer", "score"],
+    "limit": 5,
+    "params": {
+      "qf": "name manufacturer longDescription",
+      "defType": "edismax"
+    }
+}
+
+search_results = requests.post(solr_url + collection + "/select", json=request).json()["response"]["docs"]
+display(HTML(render_search_results(query, search_results)))
+```
 
 
 
